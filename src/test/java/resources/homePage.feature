@@ -3,7 +3,7 @@ Feature: Add to cart
   Scenario Outline: Add item into Cart
     Given as a user I am on home page
     When I select the option for buying item as "<options>"
-    Then I navigate to "tech" page
+    Then I navigate to "<options>" page
     When I select the item options "<items>"
     Then I navigate to "<items>" page
     When I select the item options "<product>"
