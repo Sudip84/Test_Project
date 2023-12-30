@@ -3,7 +3,9 @@ package driverHelper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -16,7 +18,13 @@ public class DriverHelper {
      public static void initializeDriver(){
          if (browser.equals("chrome")){
              WebDriverManager.chromedriver().setup();
-             driver = new ChromeDriver();
+             ChromeOptions options = new ChromeOptions();
+             options.addArguments("--disable-web-security");
+             options.addArguments("--disable-popup-blocking");
+             DesiredCapabilities chrome = DesiredCapabilities.chrome();
+             chrome.setJavascriptEnabled(true);
+             options.setCapability(ChromeOptions.CAPABILITY, options);
+             driver = new ChromeDriver(options);
          } else if (browser.equals("firefox")) {
              WebDriverManager.firefoxdriver().setup();
              driver = new FirefoxDriver();
